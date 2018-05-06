@@ -1,35 +1,39 @@
 # cfgoto README
 
-This is the README for your extension "cfgoto". After writing up a brief description, we recommend including the following sections.
+This is an extension for CFML to easily navigate to the cfml component defintions and cfm templates
 
-## Features
+## Go To Definition
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Open the templates of Components in the line of cursor.
 
-For example if there is an image subfolder under your extension project workspace:
+For example if there is tag like below
 
-\!\[feature X\]\(images/feature-x.png\)
+	<cfinclude template="globals.cfm">
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+Pressing Ctrl+F1 will open the template **globals.cfm**
+
+Win/Linux: `Ctrl+F1`; Mac: `Cmd+F1`
+
+Similarly it works at following places
+
+`component implements = 'MyProject.interface.Handler'`  will open MyProject/interface/Handler.cfc
+
+`component extends = "components.xmlrpc.Service" auth = "none" {` will open components/xmlrpc/Service.cfc
+
+`component extends = 'MixInBase' {` will open MixInBase.cfc
+
+`var configuration = new components.configuration.Manager('API.crimson');` will open components\configuration\Manager.cfc
+
+`var defaults = new DefaultValues();` will open DefaultValues.cfc
+
 
 ## Requirements
 
 If you have any requirements or dependencies, add a section describing those and how to install and configure them.
 
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+It works by parsing the entire line and not where the cursor position is.
 
 ## Release Notes
 
@@ -37,7 +41,7 @@ Users appreciate release notes as you update your extension.
 
 ### 1.0.0
 
-Initial release of ...
+Initial release of CFMl GoTo ...
 
 ### 1.0.1
 
@@ -48,18 +52,5 @@ Fixed issue #.
 Added features X, Y, and Z.
 
 -----------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
 
 **Enjoy!**
