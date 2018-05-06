@@ -4,6 +4,9 @@
     "description": "CFML GoTo Definition",
     "version": "0.0.1",
     "publisher": "rohithkrajan",
+    "repository": {
+        "url": "https://github.com/rohithkrajan/vscode-cfmlgoto"
+    },
     "engines": {
         "vscode": "^1.23.0"
     },
