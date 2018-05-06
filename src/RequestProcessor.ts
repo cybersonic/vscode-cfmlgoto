@@ -1,22 +1,25 @@
-class RequestProcessor {
-    _handlers: BaseHandler[] = [];
-    constructor(public handlers: BaseHandler[]) {
-        this._handlers = handlers;
+import {Parser} from "./Parser";
+ import * as vscode from 'vscode';
+
+export class RequestProcessor {
+    _handlers: Parser[] = [];    
+    constructor() {        
     }
-    Add(handler: BaseHandler) {
+    add(handler: Parser) {
         this._handlers.push(handler);
     }
-    Execute():vscode.Uri 
+    execute(selectedText:string):vscode.Uri|undefined 
     {
-        this._handlers.forEach(handler => {
+        for (let index = 0; index < this._handlers.length; index++) {
+            const handler = this._handlers[index];
             try {
-                handler.handleRequest(1);
-
-            } catch (error) {
-                
-            }
-            
-        });
+                let result=handler.parse(selectedText);
+                if (result[0]) {
+                    return vscode.Uri.file(result[1]);
+                }
+            } catch (error) {                
+            }                       
+        }        
     }
 
 }
