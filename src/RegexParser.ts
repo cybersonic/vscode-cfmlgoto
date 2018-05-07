@@ -1,18 +1,15 @@
-import {Parser} from './Parser';
+import {ComponentParser} from './ComponentParser';
 import * as fs from 'fs';
 
-  export class RegexParser extends Parser {
+  export class RegexParser extends ComponentParser {
     
     _expression:RegExp;
     _extension?:string;
     constructor(description:string,possibleBaseDirs:string[], expr:RegExp,extension?:string)
     {
-      super(description,possibleBaseDirs);
+      super(description,possibleBaseDirs,extension);
       this._expression=expr;
-      if(extension)
-      {
-        this._extension=extension;
-      }
+      
     }
     parse(selectedText: string): [boolean,string] {
       let result:[boolean,string]=[false,""];
@@ -44,31 +41,6 @@ import * as fs from 'fs';
       }
       return result;
     }
-
-    private buildComponentPath(matchedText: string):[boolean,string] {
-        let result:[boolean,string]=[false,""];
-        var componentName: string = matchedText;
-        var componentpath: string = componentName;
-        var componentFilePath:string ;
-        if (componentName.indexOf(".") !== -1) {
-          componentpath = componentName.split(".").join("\\");
-        }
-        for (let index = 0; index < this._possibleBaseDirs.length; index++) {
-          const baseDir = this._possibleBaseDirs[index];
-          componentFilePath = baseDir + "\\" + componentpath + this._extension;
-           try {
-            fs.accessSync(componentFilePath);
-            result=[true,componentFilePath];
-            return result;
-          }
-          catch (error) {   
-            //don't do anything if file does not exist         
-          }          
-        }      
-        return result;
-      }
-      
-    
   }
 
 

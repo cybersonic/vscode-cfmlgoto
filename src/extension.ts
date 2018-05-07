@@ -5,6 +5,7 @@ import * as vscode from 'vscode';
 import * as path from "path";
 import { RequestProcessor } from './RequestProcessor';
 import {RegexParser} from './RegexParser';
+import { LineParser } from './LineParser';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -39,6 +40,8 @@ export function activate(context: vscode.ExtensionContext) {
         process.add(new RegexParser("extends Component",possibleDirs,/\s+extends\s?=\s?[\'\"]([^\s]+)[\'\"]/,".cfc"));
         process.add(new RegexParser("implements Component",possibleDirs,/\s+implements\s?=\s?[\'\"]([^\s]+)[\'\"]/,".cfc"));
         process.add(new RegexParser("createObject component call",possibleDirs,/createObject\(\"component\"\,\"([^\s]+)\"/,".cfc"));
+        process.add(new LineParser("match a component name from the current cursor position",
+                    possibleDirs,selection.start.character,".cfc"));
 
         var gotoDocPath= process.execute(textLine.text);
 
